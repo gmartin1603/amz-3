@@ -30,19 +30,23 @@ export const AmazonProvider = ({children}) => {
         }
     }
 
-    useEffect(() => {
+    useEffect(() => (
        async() => {
            if (isAuthenticated) {
                const currentUser = await user?.get('nickname')
                setUsername(currentUser)
            }
        } 
-    },[isAuthenticated, user, username])
+    ),[isAuthenticated, user])
 
     return (
         <AmazonContext.Provider
         value={{
-
+            isAuthenticated,
+            nickname,
+            handleSetUsername,
+            username,
+            setNickname
         }}
         >
             {children}

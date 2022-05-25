@@ -7,12 +7,20 @@ import logoFull from '../assest/amazon_logo_full.png'
 import {FaBox} from 'react-icons/fa'
 import {BsFillBookmarkFill,BsFillPersonFill} from 'react-icons/bs'
 import {AiOutlineHistory} from 'react-icons/ai'
+import { AmazonContext } from '../context/AmazonContext'
+import { useContext } from 'react'
 
 const Sidebar = () => {
 
-    const isAuth = true
-    const username = ""
-    const nickname = ""
+  const {
+    isAuthenticated,
+    nickname,
+    setNickname,
+    username,
+    handleSetUsername,
+  } = useContext(AmazonContext)
+
+    
 
     const styles = {
         container: `h-full w-[300px] flex flex-col bg-[#fff] static`,
@@ -32,7 +40,7 @@ const Sidebar = () => {
   return (
     <div className={styles.container}>
           <div className={styles.profile}>
-        {isAuth && (
+        {isAuthenticated && (
           <>
             <div className={styles.profilePicContainer}>
               <Image
@@ -50,13 +58,13 @@ const Sidebar = () => {
                     type='text'
                     placeholder='Username....'
                     className={styles.usernameInput}
-                    // value={nickname}
-                    // onChange={e => setNickname(e.target.value)}
+                    value={nickname}
+                    onChange={e => setNickname(e.target.value)}
                   />
                 </div>
                 <button
                   className={styles.setNickname}
-                  // onClick={handleSetUsername}
+                  onClick={handleSetUsername}
                 >
                   Set Nickname
                 </button>
